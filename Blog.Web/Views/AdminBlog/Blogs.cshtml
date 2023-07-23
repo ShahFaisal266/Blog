@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Blog.Web.Models.Domain.BlogPost>
+@{
+}
+
+<html>
+<head>
+    <title>Blog Posts</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS style for the cards */
+        .card {
+            max-width: 300px;
+            
+            
+        }
+        
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="card-deck">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4" style="padding:5px">
+                        <!-- Change the number based on the desired number of columns -->
+                       
+                    <div class="card">
+                        <img src="@item.FeaturedImageURl" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.PageTitle</h5>
+                            <p class="card-text">@item.shortDescription</p>
+                            <p class="card-text">
+                                <small class="text-muted">Published on @item.PublishedDate.ToString("MMMM dd, yyyy") by @item.Author</small>
+                            </p>
+                            <form method="post" asp-controller="AdminBlog" asp-action="GetOneBlog" asp-route-id="@item.Id">
+                                <button class="btn btn-primary" style="color: white;">View</button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+        
+</body>
+</html>

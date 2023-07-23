@@ -1,0 +1,56 @@
+﻿@model Blog.Web.Models.Domain.BlogPost
+
+<html>
+<head>
+    <style>
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            
+        }
+        .card-img-top {
+            width: 200px; /* Set a smaller width */
+            height: 400px; /* Set your desired height */
+            object-fit:fill; /* Maintain aspect ratio and crop as needed to fill the box */
+        }
+        body{
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-y:hidden;
+        }
+    </style>
+    <title>Blog Posts</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body> 
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+             
+                    <div class="card mb-4">
+                        <img src="@Model.FeaturedImageURl" class="card-img-top" alt="Featured Image">
+                    
+                        <div class="card-body">
+                            <h2 class="card-title">@Model.PageTitle</h2>
+                            <p class="card-subtitle mb-2 text-muted">@Model.shortDescription</p>
+                        <p class="card-text">@Model.Content</p>
+                            <p class="card-text">
+                            <small class="text-muted">Published on @Model.PublishedDate.ToString("MMMM dd, yyyy") by @Model.Author</small>
+                            </p>
+                        <form method="get" asp-controller="BookedItems" asp-action="Create" asp-route-id="@Model.Id">
+                            <button type="submit" class="btn btn-primary" style="color:white; margin-bottom: 10px;">Get Book</button>
+                        </form>
+                           
+                        </div>
+                    </div>
+                
+            </div>
+                
+        </div>
+    </div>
+        
+</body>
+</html>

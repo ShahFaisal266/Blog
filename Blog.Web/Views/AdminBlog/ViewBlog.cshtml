@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Blog.Web.Models.Domain.BlogPost>
+
+@{
+    ViewData["Title"] = "ViewBlog";
+}
+
+<h1>ViewBlog</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Heading</th>
+                <th>Page Title</th>
+                <th>Content</th>
+                <th>Featured Image URL</th>
+                <th>URL Handle</th>
+                <th>Published Date</th>
+                <th>Visible</th>
+                <th>Author</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Heading)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PageTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Content)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FeaturedImageURl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UrlHandle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PublishedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Visible)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Author)
+                    </td>
+
+                    <td>
+                        <form method="post" asp-controller="AdminBlog" asp-action="DeleteView" asp-route-id="@item.Id">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this blog post?')">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No blog posts found.</p>
+}
